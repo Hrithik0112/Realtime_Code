@@ -30,6 +30,12 @@ const HomePage = () => {
     toast.success("ROOM joined succesfully");
   };
 
+  const handleInputEnter = (e) => {
+    if (e.code === "Enter") {
+      joinRoom();
+    }
+  };
+
   return (
     <div className="flex justify-center items-center h-screen ">
       <div className="bg-[#282a36] p-5 rounded-xl w-[500px] max-w-[90%] ">
@@ -41,6 +47,7 @@ const HomePage = () => {
             type="text"
             value={roomId}
             onChange={(e) => setRoomId(e.target.value)}
+            onKeyUp={handleInputEnter}
             placeholder="ROOM ID"
             className="p-3 rounded-md outline-none border-none mb-4 bg-[#eee] text-lg font-bold text-black"
           />
@@ -48,6 +55,7 @@ const HomePage = () => {
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            onKeyUp={handleInputEnter}
             placeholder="USERNAME"
             className="p-3 rounded-md outline-none border-none mb-4 bg-[#eee] text-lg font-bold text-black"
           />
