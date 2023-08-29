@@ -1,9 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Logo from "/1200px-Logo_CODE.svg.png";
 import Editor from "../components/Editor";
 import Client from "../components/Client";
+import { initSocket } from "../socket";
+import ACTIONS from "../Action";
+import { useLocation } from "react-router-dom";
 
 const LIveCodePage = () => {
+  const socketRef = useRef(null);
+  const location = useLocation();
+  useEffect(() => {
+    const init = async () => {
+      socketRef.current = await initSocket("http://localhost:3000");
+      // socketRef.current.emit(ACTIONS.JOIN , {
+      //   roomId,
+      //   username: location.state?.username,
+      // })
+    };
+    init();
+  }, []);
+
   const [clients, setClients] = useState([
     { socketId: 1, username: "Hrithik Dutta" },
     { socketId: 2, username: "Lama Dev" },
