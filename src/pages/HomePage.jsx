@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 import Logo from "/1200px-Logo_CODE.svg.png";
 import Footer from "../components/Footer";
+import { toast } from "react-hot-toast";
 
 const HomePage = () => {
   const [roomId, setRoomId] = useState("");
+  const [username, setUsername] = useState("");
+
   const createNewRoom = () => {
     const id = Date.now();
     setRoomId(id);
+    toast.success("Created Room Succesfully");
   };
   return (
     <div className="flex justify-center items-center h-screen ">
@@ -24,6 +28,8 @@ const HomePage = () => {
           />
           <input
             type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
             placeholder="USERNAME"
             className="p-3 rounded-md outline-none border-none mb-4 bg-[#eee] text-lg font-bold text-black"
           />
