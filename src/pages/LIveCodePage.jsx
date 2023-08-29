@@ -1,7 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
+import Logo from "/1200px-Logo_CODE.svg.png";
+import Editor from "../components/Editor";
+import Client from "../components/Client";
 
 const LIveCodePage = () => {
-  return <div className="text-xl font-bold">LIveCodePage</div>;
+  const [clients, setClients] = useState([
+    { socketId: 1, username: "Hrithik Dutta" },
+    { socketId: 2, username: "Lama Dev" },
+  ]);
+  return (
+    <div className="grid grid-cols-12 h-screen ">
+      <div className="bg-[#1c1e29] p-4 text-[#fff] flex flex-col col-span-2 ">
+        <div className="flex-1 ">
+          <div className="border-b-2 border-[#424242]">
+            <img className="h-16" src={Logo} alt="logo" />
+          </div>
+          <h3 className="font-semibold text-lg mt-4 mb-4">Connected</h3>
+          <div className="flex items-center flex-wrap gap-5">
+            {clients.map((client) => (
+              <Client key={client.socketId} username={client.username} />
+            ))}
+          </div>
+        </div>
+        <button className="p-3 rounded-md text-lg font-bold cursor-pointer w-full ml-auto bg-gray-500">
+          Copy ROOM ID
+        </button>
+        <button className="p-3 rounded-md text-lg font-bold cursor-pointer w-full ml-auto bg-[#4aed88] mt-5">
+          Leave
+        </button>
+      </div>
+
+      <div className="col-span-10">
+        <Editor />
+      </div>
+    </div>
+  );
 };
 
 export default LIveCodePage;
