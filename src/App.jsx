@@ -1,9 +1,17 @@
 import React from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import LIveCodePage from "./pages/LIveCodePage";
 
 function App() {
   return (
     <>
-      <h1>Wake Up To Reality</h1>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/editor/:roomId" element={<LIveCodePage />} />
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }
