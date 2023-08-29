@@ -2,8 +2,11 @@ import React, { useState } from "react";
 import Logo from "/1200px-Logo_CODE.svg.png";
 import Footer from "../components/Footer";
 import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
+  const navigate = useNavigate();
+
   const [roomId, setRoomId] = useState("");
   const [username, setUsername] = useState("");
 
@@ -12,6 +15,21 @@ const HomePage = () => {
     setRoomId(id);
     toast.success("Created Room Succesfully");
   };
+
+  const joinRoom = () => {
+    if (!username || !roomId) {
+      toast.error("ROOM ID and USERNAME is required");
+      return;
+    }
+    //redirect to editor page
+    navigate(`editor/${roomId}`, {
+      state: {
+        username,
+      },
+    });
+    toast.success("ROOM joined succesfully");
+  };
+
   return (
     <div className="flex justify-center items-center h-screen ">
       <div className="bg-[#282a36] p-5 rounded-xl w-[500px] max-w-[90%] ">
@@ -33,7 +51,10 @@ const HomePage = () => {
             placeholder="USERNAME"
             className="p-3 rounded-md outline-none border-none mb-4 bg-[#eee] text-lg font-bold text-black"
           />
-          <button className="p-3 rounded-md text-lg font-bold cursor-pointer w-24 ml-auto bg-[#4aed88]">
+          <button
+            className="p-3 rounded-md text-lg font-bold cursor-pointer w-24 ml-auto bg-[#4aed88]"
+            onClick={joinRoom}
+          >
             JOIN
           </button>
           <span className="mx-auto mt-5">
